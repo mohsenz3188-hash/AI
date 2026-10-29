@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#10251f">
+  <title>نوا — فضای کار هوش مصنوعی</title>
+  <link rel="icon" href="/static/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/style.css"><script src="/static/app.js" defer></script>
+</head>
+<body>
+  <div id="toast" role="alert" hidden></div>
+  <section id="login-screen" class="login-screen">
+    <div class="login-art"><span class="eyebrow">NAVA / PERSONAL INTELLIGENCE</span><div class="orbit"><span>نوا</span></div><h1>از یک ایده،<br>تا هزار امکان.</h1><p>فضای شخصی تو برای فکر کردن، نوشتن کد و ساختن تصویر.</p><small>روی سرور خودت. با مدل انتخابی خودت.</small></div>
+    <form id="login-form" class="login-card"><span class="brand-mark">ن</span><h2>به نوا خوش آمدی</h2><p>برای ورود به فضای کارت، اطلاعات حساب را بنویس.</p><label for="username">نام کاربری</label><input id="username" name="username" autocomplete="username" required maxlength="100" dir="ltr"><label for="password">رمز عبور</label><input id="password" name="password" type="password" autocomplete="current-password" required maxlength="256" dir="ltr"><button class="primary" type="submit">ورود به فضای کار ←</button><p id="login-error" class="error" role="alert"></p></form>
+  </section>
+  <div id="workspace" class="workspace" hidden>
+    <aside id="sidebar" class="sidebar">
+      <div class="brand"><span class="brand-mark">ن</span><div><strong>نوا</strong><small>همراه ایده‌های تو</small></div><button id="close-menu" class="mobile icon" aria-label="بستن فهرست">×</button></div>
+      <button id="new-chat" class="new-chat">＋ گفتگوی تازه</button>
+      <nav aria-label="ابزارها"><button class="nav-item active" data-page="chat"><span>◈</span> گفتگو و کدنویسی</button><button class="nav-item" data-page="images"><span>▧</span> استودیوی تصویر <small>خلق کن</small></button></nav>
+      <div class="history-label">گفتگوهای اخیر</div><input id="search" class="search" placeholder="جستجو در گفتگوها…" aria-label="جستجو در گفتگوها"><div id="history" class="history"></div>
+      <div class="sidebar-bottom"><div class="private-label"><span class="dot"></span> فضای شخصی شما</div><div class="account"><span id="account-name">مدیر</span><button id="logout" class="text-button">خروج ↗</button></div></div>
+    </aside>
+    <main>
+      <header><div class="header-title"><button id="menu" class="mobile icon" aria-label="باز کردن فهرست">☰</button><span id="page-title">فضای کار</span><span class="badge">NAVA AI</span></div><div class="header-actions"><button id="rename-chat" class="text-button" hidden>تغییر نام</button><button id="export-chat" class="text-button" hidden>دریافت گفتگو ↓</button><button id="delete-chat" class="text-button danger" hidden>حذف</button></div></header>
+      <div id="config-notice" class="notice" hidden></div>
+      <section id="chat-page" class="chat-page">
+        <div id="welcome" class="welcome"><span class="eyebrow">جایی برای ایدهٔ بعدی تو</span><h1>امروز چه چیزی<br><em>می‌سازیم؟</em></h1><p>بنویس، یاد بگیر، مسئله حل کن.<br>نوا در هر مرحله کنارت است.</p><div class="suggestions"><button data-mode="code" data-prompt="یک API ساده با Python و FastAPI برای مدیریت کارها بنویس و روش اجرای آن را توضیح بده."><span>⌘</span><strong>یک ایده را کد کن</strong><small>ساخت، توضیح و بهبود کد ↗</small></button><button data-mode="debug" data-prompt="می‌خواهم یک خطای برنامه‌نویسی را حل کنم. برای شروع چه اطلاعاتی نیاز داری؟"><span>⌁</span><strong>گره مسئله را باز کن</strong><small>عیب‌یابی با توضیح روشن ↗</small></button><button data-mode="translate" data-prompt="متنی برای ترجمه دارم. آماده‌ای؟"><span>文</span><strong>از مرز زبان‌ها بگذر</strong><small>ترجمه و بازنویسی متن ↗</small></button></div><div class="capability-note">پشتیبانی زبانی و کیفیت کد به مدل انتخابی بستگی دارد.</div></div>
+        <div id="messages" class="messages" aria-live="polite" aria-relevant="additions" hidden></div>
+        <div class="composer-wrap"><form id="chat-form" class="composer"><div id="attachments" class="attachment-list"></div><label class="sr-only" for="prompt">پیام شما</label><textarea id="prompt" placeholder="ایده‌ات را بنویس یا کدت را اینجا بگذار…" rows="3" required maxlength="20000" dir="auto"></textarea><div class="composer-tools"><div class="tool-group"><button id="attach" type="button" class="icon" title="افزودن فایل متنی یا کد" aria-label="افزودن فایل متنی یا کد">＋</button><input id="file-input" type="file" multiple hidden><select id="mode" aria-label="نوع دستیار"><option value="chat">گفتگو</option><option value="code">کدنویسی</option><option value="review">بازبینی کد</option><option value="debug">رفع خطا</option><option value="translate">ترجمه</option><option value="summarize">خلاصه‌سازی</option></select><select id="model" aria-label="مدل هوش مصنوعی"></select></div><button id="send" type="submit" class="send" aria-label="ارسال پیام">↑</button></div></form><div class="composer-footer"><label>زبان پاسخ <input id="language" value="فارسی" list="languages" maxlength="80" aria-label="زبان پاسخ؛ هر زبانی را بنویسید"></label><datalist id="languages"><option value="فارسی"><option value="English"><option value="العربية"><option value="Deutsch"><option value="Français"><option value="Español"><option value="中文"><option value="日本語"><option value="हिन्दी"><option value="Türkçe"></datalist><small>پاسخ‌های مهم و کد تولیدشده را بررسی کن.</small></div></div>
+      </section>
+      <section id="images-page" class="images-page" hidden><div class="image-heading"><span class="eyebrow">NAVA / IMAGE STUDIO</span><h1>خیالت را <em>تصویر کن.</em></h1><p>جزئیات، نور، رنگ و حال‌وهوای تصویرت را توصیف کن.</p></div><form id="image-form" class="image-form"><label class="sr-only" for="image-prompt">توضیح تصویر</label><textarea id="image-prompt" required maxlength="4000" rows="4" placeholder="مثلاً: یک خانهٔ کوچک کنار دریا، نور گرم غروب، سبک آبرنگ…" dir="auto"></textarea><div><select id="image-size" aria-label="نسبت تصویر"><option value="1024x1024">مربع · ۱:۱</option><option value="1536x1024">افقی · ۳:۲</option><option value="1024x1536">عمودی · ۲:۳</option></select><button id="generate" class="primary">✧ ساخت تصویر</button></div><p id="image-status" role="status"></p></form><div class="gallery-title"><h2>گالری تو</h2><span>تصویرهای ذخیره‌شده روی سرور</span></div><div id="gallery" class="gallery"></div></section>
+    </main>
+  </div>
+</body>
+</html>
